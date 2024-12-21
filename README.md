@@ -36,14 +36,14 @@ Parallel sorting algorithms are crucial for processing large datasets efficientl
   - Compare and swap elements at even indices.
   - Odd-ranked processes keep larger elements; even-ranked processes keep smaller elements.
 
-  ![Odd-Even Sort Even Phase](docs/images/even_phase_merge.png)
+  ![Odd-Even Sort Even Phase](docs/images/even_phase_merge.jpg)
 
 #### Odd Phase
 - **Operation:**
   - Compare and swap elements at odd indices.
   - Odd-ranked processes keep smaller elements; even-ranked processes keep larger elements.
 
-  ![Odd-Even Sort Odd Phase](images/odd_phase_merge.png)
+  ![Odd-Even Sort Odd Phase](docs/images/odd_phase_merge.jpg)
 
 - **Work Distribution:**
   - Each process sorts its portion of data using a fast serial algorithm (e.g., Quick Sort).
@@ -58,14 +58,14 @@ Parallel sorting algorithms are crucial for processing large datasets efficientl
   - Even-ranked processes depend on their next higher-ranked neighbors.
   - Odd-ranked processes depend on their previous lower-ranked neighbors.
 
-  ![Even Phase Dependencies](images/even_phase_dependencies.png)
+  ![Even Phase Dependencies](docs/images/even_phase_dependencies.jpg)
 
 #### Odd Phase Dependencies
 - **Explanation:**
   - Odd-ranked processes depend on their next higher-ranked neighbors.
   - Even-ranked processes depend on their previous lower-ranked neighbors.
 
-  ![Odd Phase Dependencies](images/odd_phase_dependencies.png)
+  ![Odd Phase Dependencies](docs/images/odd_phase_dependencies.jpg)
 
 - **Execution Times:**
 
@@ -93,7 +93,7 @@ Parallel sorting algorithms are crucial for processing large datasets efficientl
   - Processes depend on neighbors during each merge step.
   - Tree-based merge minimizes communication overhead.
 
-  ![Quick Sort Dependencies](images/quick_sort_dependencies.png)
+  ![Quick Sort Dependencies](docs/images/quick_sort_dependencies.jpg)
 
   At each merge step, processes with ranks divisible by `2 * step` must wait for their neighbors (with ranks equal to their rank + `step`) to send sorted subsequences.
 
@@ -112,6 +112,7 @@ Parallel sorting algorithms are crucial for processing large datasets efficientl
   The algorithm produces a sorted sequence through a series of **bitonic merges**, which convert two bitonic sequences into a sorted sequence. A sequence is bitonic if it first monotonically increases and then decreases, or vice versa.
 
   - **Algorithm Process Flow:**
+    
     ![Bitonic Sort Flow](docs/images/bitonic_sort_stages.png)
 
     Initially, each process handles a local sorted sequence. Pairs of processes perform compare-and-exchange operations, iteratively converting subsequences into bitonic sequences and merging them into sorted sequences. This process continues until the entire sequence is sorted.
@@ -121,7 +122,7 @@ Parallel sorting algorithms are crucial for processing large datasets efficientl
   - Pairs of processes perform compare-and-exchange operations based on polarities dictated by the sorting network.
 
   - **Parallelization and Work Distribution:**
-    ![Bitonic Work Distribution](docs/images/bitonic_sort_work_distribution.png)
+    ![Bitonic Work Distribution](docs/images/bitonic_sort_work_distribution.jpg)
 
     At each stage, processes pair up to compare and exchange data. Smaller elements are retained by one process, and larger elements by the other. This ensures global sorting across stages.
 
